@@ -18,7 +18,7 @@ public class Ball : MonoBehaviour {
 			this.transform.position = paddle.transform.position + paddleTOBallVactor;
 			if (Input.GetMouseButtonDown (0)) {
 				Debug.Log ("left mouse button clicked");
-				this.rigidbody2D.velocity = new Vector2 (0f, 10f);
+				this.rigidbody2D.velocity = new Vector2 (2f, 10f);
 				gameStarted = true;
 			}
 		}
