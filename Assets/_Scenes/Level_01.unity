@@ -73,7 +73,6 @@ NavMeshSettings:
     minRegionArea: 2
     widthInaccuracy: 16.666666
     heightInaccuracy: 10
-    tileSizeHint: 0
   m_NavMesh: {fileID: 0}
 --- !u!1 &684387
 GameObject:
@@ -4277,6 +4276,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 11428130, guid: 952c2ae88534c495e922352e9f669e03, type: 2}
+      propertyPath: ball
+      value: 
+      objectReference: {fileID: 1890466325}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 952c2ae88534c495e922352e9f669e03, type: 2}
   m_RootGameObject: {fileID: 1060935439}
@@ -11900,7 +11903,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02cf203112469e444815a4d8898b3791, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  paddle: {fileID: 1060935444}
 --- !u!1001 &1892216018
 Prefab:
   m_ObjectHideFlags: 0

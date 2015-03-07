@@ -3,12 +3,14 @@ using System.Collections;
 
 public class Ball : MonoBehaviour {
 
-	public Paddle paddle;
+	private Paddle paddle;
 	private Vector3 paddleTOBallVactor;
 	private bool gameStarted = false;
+	public const float BALL_VELOCITY = 10f;
 
 	// Use this for initialization
 	void Start () {
+		paddle = GameObject.FindObjectOfType<Paddle> ();
 		paddleTOBallVactor = this.transform.position - paddle.transform.position;
 	}
 	
@@ -18,9 +20,15 @@ public class Ball : MonoBehaviour {
 			this.transform.position = paddle.transform.position + paddleTOBallVactor;
 			if (Input.GetMouseButtonDown (0)) {
 				Debug.Log ("left mouse button clicked");
-				this.rigidbody2D.velocity = new Vector2 (2f, 10f);
+				this.changeBallBounceAngle(new Vector2 (0f, BALL_VELOCITY));
 				gameStarted = true;
 			}
 		}
+	}
+	/*
+	 * THIS METHOD CHANGES THE VELOCITY OF THE BALL, AS WELL AS THE ANGLE OF REACTION.  
+	 */
+	public void changeBallBounceAngle(Vector2 vector){
+		this.rigidbody2D.velocity = vector;
 	}
 }
