@@ -7,8 +7,12 @@ public class LevelManager : MonoBehaviour {
 	}
 
 	public void LoadLevel(string name){
-		Debug.Log ("New Level load: " + name);
 		Application.LoadLevel (name);
+		if ("Level_01".Equals (name)) {
+			Screen.showCursor = false;
+		} else {
+			Screen.showCursor = true;
+		}
 	}
 
 	public void QuitRequest(){
@@ -18,6 +22,9 @@ public class LevelManager : MonoBehaviour {
 
 	public void loadNextLevel(){
 		Application.LoadLevel (Application.loadedLevel + 1);
+		if (Application.loadedLevel == 4) {
+			Screen.showCursor = true;
+		}
 	}
 	public void brickDestroyedMessage(){
 		if(Brick.breakableCount <= 0){

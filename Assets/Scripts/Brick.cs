@@ -6,20 +6,19 @@ public class Brick : MonoBehaviour {
 	private int timesHit;
 	private LevelManager levelManager;
 	public Sprite[] hitSprites;
+	public AudioClip crack;
 	public static int breakableCount;
 
 	// Use this for initialization
 	void Start () {
 		levelManager = GameObject.FindObjectOfType<LevelManager> ();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
 	void OnCollisionEnter2D(Collision2D collision){
 		bool isBreakable = (this.tag == "Breakable");
+
+		//adds a sound indepently if the game object is there or not
+		AudioSource.PlayClipAtPoint (crack, transform.position);
 		if (isBreakable) {
 			handleHits ();
 		}
@@ -46,10 +45,5 @@ public class Brick : MonoBehaviour {
 		} else {
 			loadSprites();
 		}
-	}
-	//TODO remove this method once we can win
-	void simulateWin(){
-		levelManager.loadNextLevel ();
-
 	}
 }

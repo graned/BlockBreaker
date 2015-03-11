@@ -31,4 +31,10 @@ public class Ball : MonoBehaviour {
 	public void changeBallBounceAngle(Vector2 vector){
 		this.rigidbody2D.velocity = vector;
 	}
+
+	public void OnCollisionEnter2D(Collision2D collision){
+		if (gameStarted) {
+			audio.Play ();
+		}
+	}
 }
