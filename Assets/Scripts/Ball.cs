@@ -19,7 +19,6 @@ public class Ball : MonoBehaviour {
 		if (!gameStarted) {
 			this.transform.position = paddle.transform.position + paddleTOBallVactor;
 			if (Input.GetMouseButtonDown (0)) {
-				Debug.Log ("left mouse button clicked");
 				this.changeBallBounceAngle(new Vector2 (0f, BALL_VELOCITY));
 				gameStarted = true;
 			}
