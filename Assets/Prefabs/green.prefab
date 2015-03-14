@@ -55,6 +55,7 @@ MonoBehaviour:
   hitSprites:
   - {fileID: 21300012, guid: 01deb841564fd4fef8a37d821af8abdd, type: 3}
   crack: {fileID: 8300000, guid: 53c93d1205a74e8469bd35ae92592246, type: 3}
+  volume: .25
 --- !u!212 &21214858
 SpriteRenderer:
   m_ObjectHideFlags: 1
