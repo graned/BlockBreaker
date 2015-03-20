@@ -22,9 +22,17 @@ public class Brick : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D collision){	
 		bool isBreakable = (this.tag == "Breakable");
+		Ball.BALL_VELOCITY += 0.1f;
 		float collisionPosX = ball.transform.position.x - this.transform.position.x;
+		if (Mathf.Abs(collisionPosX) < 0.1) {
+			if(collisionPosX >= 0){
+				collisionPosX = 0.1f;
+			}else{
+				collisionPosX = -0.1f;
+			}
+		}
 		float collisionPosY = ball.transform.position.y - this.transform.position.y;
-		ballVelocityVector.x = collisionPosX * 10;
+		ballVelocityVector.x = collisionPosX * 7;
 		//if ball hits the buttom part of the brick and the velocity is positive
 		if (collisionPosY < 0) {
 			ballVelocityVector.y = Ball.BALL_VELOCITY * - 1;

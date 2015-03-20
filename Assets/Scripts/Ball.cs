@@ -6,7 +6,7 @@ public class Ball : MonoBehaviour {
 	private Paddle paddle;
 	private Vector3 paddleTOBallVactor;
 	private bool gameStarted = false;
-	public const float BALL_VELOCITY = 20f;
+	public static float BALL_VELOCITY = 10f;
 
 	// Use this for initialization
 	void Start () {
