@@ -51,7 +51,6 @@ public class Paddle : MonoBehaviour {
 				ballVelocityVector.x = Random.Range(0,-10f);
 			}
 		}
-		Debug.Log ("BALLVELOCITYVECTOR: "+ballVelocityVector.x);
 		ball.changeBallBounceAngle (ballVelocityVector);	
 	}
 }

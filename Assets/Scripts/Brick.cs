@@ -7,6 +7,7 @@ public class Brick : MonoBehaviour {
 	public AudioClip crack;
 	public static int breakableCount;
 	public float volume;
+	public GameObject smoke;
 
 	private int timesHit;
 	private LevelManager levelManager;
@@ -32,7 +33,7 @@ public class Brick : MonoBehaviour {
 			}
 		}
 		float collisionPosY = ball.transform.position.y - this.transform.position.y;
-		ballVelocityVector.x = collisionPosX * 7;
+		ballVelocityVector.x = collisionPosX * 4;
 		//if ball hits the buttom part of the brick and the velocity is positive
 		if (collisionPosY < 0) {
 			ballVelocityVector.y = Ball.BALL_VELOCITY * - 1;
@@ -53,17 +54,23 @@ public class Brick : MonoBehaviour {
 		if (spriteToLoad != null) {
 			this.GetComponent<SpriteRenderer> ().sprite = spriteToLoad;
 		} else {
-			Debug.Log("Error while trying to load sprite");
+			Debug.LogError("Error while trying to load sprite");
 			throw new UnityException();
 		}
 	}
 
+	void displaySmoke(){
+		//smoke.particleSystem.startColor = this.GetComponent<SpriteRenderer> ().color;
+		GameObject smokePuff = Instantiate(smoke,this.transform.position,Quaternion.identity) as GameObject; //CASTING
+		smokePuff.particleSystem.startColor = this.GetComponent<SpriteRenderer> ().color;
+	}
 	void handleHits(){
 		timesHit++;
 		int maxHits = hitSprites.Length + 1;
 		if (timesHit >= maxHits) {
 			breakableCount--;
 			Destroy (gameObject);
+			displaySmoke();
 			levelManager.brickDestroyedMessage();
 		} else {
 			loadSprites();

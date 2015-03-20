@@ -36,4 +36,8 @@ public class Ball : MonoBehaviour {
 			audio.Play ();
 		}
 	}
+
+	public static void resetBallVelocity(){
+		BALL_VELOCITY = 10f;
+	}
 }

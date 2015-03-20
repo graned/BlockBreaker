@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class LooseColider : MonoBehaviour {
+public class LoseColider : MonoBehaviour {
 	private LevelManager levelManager;
 	/*
 	 * ESTE METODO CAPTURA EL EVENTO TRIGGER CUANDO SUCEDE UNA COLISION DE LA BOLA CON EL GAME OBJECT LLAMADO LOOSE COLIDER, 
@@ -10,7 +10,7 @@ public class LooseColider : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D collider){
 		levelManager = GameObject.FindObjectOfType<LevelManager> ();
 		levelManager.LoadLevel ("Loose Screen");
-
+		Ball.resetBallVelocity ();
 	}
 
 	/*
