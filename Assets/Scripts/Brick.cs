@@ -23,7 +23,14 @@ public class Brick : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D collision){	
 		bool isBreakable = (this.tag == "Breakable");
-		Ball.BALL_VELOCITY += 0.1f;
+		//brickBounce ();
+		//adds a sound indepently if the game object is there or not
+		AudioSource.PlayClipAtPoint (crack, transform.position,volume);
+		if (isBreakable) {
+			handleHits ();
+		}
+	}
+	private void brickBounce(){
 		float collisionPosX = ball.transform.position.x - this.transform.position.x;
 		if (Mathf.Abs(collisionPosX) < 0.1) {
 			if(collisionPosX >= 0){
@@ -41,11 +48,6 @@ public class Brick : MonoBehaviour {
 			ballVelocityVector.y = Ball.BALL_VELOCITY;
 		}
 		ball.changeBallBounceAngle (ballVelocityVector);
-		//adds a sound indepently if the game object is there or not
-		AudioSource.PlayClipAtPoint (crack, transform.position,volume);
-		if (isBreakable) {
-			handleHits ();
-		}
 	}
 
 	void loadSprites(){
@@ -71,6 +73,9 @@ public class Brick : MonoBehaviour {
 			breakableCount--;
 			Destroy (gameObject);
 			displaySmoke();
+			//Debug.Log(maxHits/10f);
+			Ball.BALL_VELOCITY += maxHits/10f;
+
 			levelManager.brickDestroyedMessage();
 		} else {
 			loadSprites();

@@ -26,6 +26,7 @@ public class Paddle : MonoBehaviour {
 	void autoPlayMethod(){
 		vector.x = Mathf.Clamp(ball.transform.position.x,0.5f,15.5f);
 		this.transform.position = vector;
+		//Ball.BALL_VELOCITY += 5;
 	}
 
 	void moveWithMouse(){
@@ -51,6 +52,7 @@ public class Paddle : MonoBehaviour {
 				ballVelocityVector.x = Random.Range(0,-10f);
 			}
 		}
+		ballVelocityVector.y = Ball.BALL_VELOCITY;
 		ball.changeBallBounceAngle (ballVelocityVector);	
 	}
 }

@@ -1,73 +1,79 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System;
+using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour {
-	/*
-	private event LevelLoadedEventHandler levelLoadedEventHandler;
+	private int currentLevel = 1;
+	public Text levelTextValue;
+	private bool needWait = true;
 
-	private delegate void LevelLoadedEventHandler(object sender, LevelLoadedEventArgs levelLoadedEventArgs);
-
-	private class LevelLoadedEventArgs : EventArgs{
-		private String levelName;
-
-		public String LevelName{
-			set{
-				this.levelName= value;
-			}
-			get{
-				return levelName;
-			}
-		}
-
-	};
-
-	private LevelLoadedEventArgs levelEventArgs;
-	*/
 	void Start(){
 		Brick.breakableCount = GameObject.FindGameObjectsWithTag ("Breakable").Length;
-		//levelEventArgs = new LevelLoadedEventArgs ();
 	}
 	public void LoadLevel(string name){
-		/*
-		levelEventArgs.LevelName = name;
-		levelLoadedEventHandler (this, levelEventArgs);
-		*/
-
 		Application.LoadLevel (name);
-		if ("Level_01".Equals (name)) {
-			Screen.showCursor = false;
-		} else {
-			Screen.showCursor = true;
+
+	}
+
+	public void Update(){
+		//Debug.Log ("Is loading Level?: " + Application.isLoadingLevel);
+		levelPresets (Application.loadedLevelName);
+
+	}
+	private void levelPresets(string levelName){
+		Debug.Log(levelName + " : "+Application.loadedLevel);
+
+		if(Application.loadedLevel == 1){
+			needWait = true;
+			levelTextValue.text = currentLevel.ToString();
+			LoadLevel("Level_"+currentLevel);
+		}else if(("Level_"+currentLevel).Equals(levelName)){
+			if(needWait){
+				//Debug.Log("ENTERED!");
+				System.Threading.Thread.Sleep(3000);
+				needWait = false;
+			}
 		}
+		Debug.Log ("Level_" + currentLevel +" = "+levelName);
+	}
+	//SINTAX EQUALS IN JAVA TO  <T EXTENDS GAMEOBJECT>
+	private T getComponentByName<T>(string componentName) where T:Component{
+		Debug.Log("IN METHOD");
+		Debug.Log("COMPONENT_NAME: "+componentName);
+		T[] componentList = GameObject.FindObjectsOfType<T>();
+		Debug.Log("NUMBER OF ELEMENTS RETRIEVED: "+componentList.Length);
+		foreach (T item in componentList) {
+			Debug.Log("INSIDE FOR LOOP");
+			Debug.Log("ITEM VALUE: "+item.name.ToLower());
+			if(componentName.ToLower().Equals(item.name.ToLower())){
+				return item;
+			}
+		}
+		//ITEM NOT FOUND
+		return null;
 	}
 
 	public void QuitRequest(){
 		Debug.Log ("Quit requested");
 		Application.Quit ();
 	}
-
-	public void loadNextLevel(){
-
-		Application.LoadLevel (Application.loadedLevel + 1);
-		//UPDATE!
-		Debug.Log (Application.loadedLevelName);
-		if ("Instruction Screen".Equals (Application.loadedLevelName)) {
-			//Debug.Log("PSSSSSSSSSSSSSSS!");
-			automaticLevelLoad(2000);
-		}
-		/*if (Application.loadedLevel == 4) {
-			Screen.showCursor = true;
-		}*/
+	
+	public void loadNextLevel(int levelIndex){
+		//LOADS A LEVEL BASED ON AN INDEX
+		Application.LoadLevel (levelIndex);
+		//OLD
+		//Application.LoadLevel (Application.loadedLevel + 1);
 	}
 	public void brickDestroyedMessage(){
 		if(Brick.breakableCount <= 0){
-			loadNextLevel();
+
+			Debug.Log("current level(before): "+currentLevel);
+			++currentLevel;
+			Debug.Log("current level(after): "+currentLevel);
+
+			LoadLevel("Level Introduction");
+			//loadNextLevel();
 		}
 	}
 
-	public void automaticLevelLoad(int seconds){
-		loadNextLevel ();
-		System.Threading.Thread.Sleep (seconds);
-	}
 }
