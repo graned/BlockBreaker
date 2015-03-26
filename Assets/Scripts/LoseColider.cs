@@ -9,6 +9,7 @@ public class LoseColider : MonoBehaviour {
 	 */
 	void OnTriggerEnter2D(Collider2D collider){
 		levelManager = GameObject.FindObjectOfType<LevelManager> ();
+		levelManager.resetLevel ();
 		levelManager.LoadLevel ("Loose Screen");
 		Ball.resetBallVelocity ();
 	}

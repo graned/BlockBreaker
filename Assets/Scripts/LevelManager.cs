@@ -8,6 +8,10 @@ public class LevelManager : MonoBehaviour {
 	private int seconds;
 	private bool needWait = true;
 
+	public void resetLevel(){
+		currentLevel = 1;
+	}
+
 	private class TimerThread{
 		private LevelManager levelManager;
 		private string levelToLoad;

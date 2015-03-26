@@ -23,7 +23,7 @@ public class Brick : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D collision){	
 		bool isBreakable = (this.tag == "Breakable");
-		//brickBounce ();
+		brickBounce ();
 		//adds a sound indepently if the game object is there or not
 		AudioSource.PlayClipAtPoint (crack, transform.position,volume);
 		if (isBreakable) {
@@ -74,8 +74,7 @@ public class Brick : MonoBehaviour {
 			Destroy (gameObject);
 			displaySmoke();
 			//Debug.Log(maxHits/10f);
-			Ball.BALL_VELOCITY += maxHits/10f;
-
+			Ball.BALL_VELOCITY += maxHits/20f;
 			levelManager.brickDestroyedMessage();
 		} else {
 			loadSprites();
