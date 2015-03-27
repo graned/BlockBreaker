@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class LevelManager : MonoBehaviour {
 	private static int currentLevel = 1;
 	public Text levelTextValue;
+	public Text levelTextCounter;
 	private int seconds;
 	private bool needWait = true;
 
@@ -50,6 +51,7 @@ public class LevelManager : MonoBehaviour {
 		//Debug.Log ("Is loading Level?: " + Application.isLoadingLevel);
 		//levelPresets (Application.loadedLevelName);
 		if (Application.loadedLevel == 1) {
+			levelTextCounter.text = seconds.ToString();
 			if(seconds == 0){
 				LoadLevel("Level_"+currentLevel);
 			}
